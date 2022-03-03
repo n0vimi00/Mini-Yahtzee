@@ -90,20 +90,15 @@ export default function Gameboard() {
     if (throwsLeft > 0) {
       setStatus('Throw first')
       return;
-    }
-    let points = [...selectedPoints];
-    let index = pointIndex(i);
-    if (points[index]['selected'] === true) {
-      return;
     } else {
-      points[index]['selected'] === true;
+      let points = [...selectedPoints];
+      let index = pointIndex(i);
       setThrowsleft(NBR_OF_THROWS);
-
+      
       let totalPoints = board.map(item => item.slice(5,7));
       let count = totalPoints.filter(x => x == (index+1)).length;
       let sum = count * (index + 1);
       points[index]['sum'] = sum;
-      points[index]['locked'] = true;
       setSelectedPoints(points);
       setTotal(total + sum);
     }
@@ -111,15 +106,6 @@ export default function Gameboard() {
 
   function sumText(i) {
     return selectedPoints[i]['sum'];
-  }
-
-  function pointColor(i) {
-    let index = pointIndex(i);
-    if (selectedPoints[index]['selected'] === true) {
-      return 'black';
-    } else {
-      return 'steelblue';
-    }
   }
 
   function pointIcon(i) {
@@ -135,7 +121,7 @@ export default function Gameboard() {
         onPress={() => selectDice(i)}>
         <MaterialCommunityIcons
           name={board[i]}
-          key={"row" + i}
+          key={'row' + i}
           size={50}
           color={getDiceColor(i)}>
         </MaterialCommunityIcons>
@@ -152,9 +138,9 @@ export default function Gameboard() {
           onPress={() => selectPoint(i)}>
           <MaterialCommunityIcons
             name={pointIcon(i)}
-            key={"points" + i}
+            key={'points' + i}
             size={50}
-            color={pointColor(i)}>
+            color={'steelblue'}>
           </MaterialCommunityIcons>
         </Pressable>
       </View>
